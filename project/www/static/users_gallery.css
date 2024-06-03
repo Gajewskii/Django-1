@@ -1,0 +1,62 @@
+
+.gallery{
+    padding: 2rem;
+}
+
+.posts{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.post{
+    background-color: #fff;
+    color:#000;
+    text-align: center;
+    height: auto;
+    border-radius: 16px;
+    width: 20%;
+    height: 55vh;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    margin: 1rem;
+}
+
+
+.post_text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.post_text > p{
+    width: 70%;
+}
+
+.post_photo{
+    border-radius: 16px;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+   
+}
+
+.post_data{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction:row ;
+    margin: 2rem 0;
+}   
+
+.post_userphoto{
+    width: 100px;
+    height:100px;
+    margin-right: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+

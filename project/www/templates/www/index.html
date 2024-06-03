@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podróże</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'header_about.css' %}">
+    <link rel="stylesheet" href="{% static 'about_me_and_form.css' %}">
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <link rel="stylesheet" href="{% static 'users_gallery.css' %}">
+</head>
+<body>
+    <section class="header_about">
+        <header>
+            <h1>Świat na walizkach! </h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Strona Główna</a></li>
+                    <li><a href="#about">O mnie</a></li>
+                    <li><a href="#gallery">Galeria użytkowników</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+     
+                <section class="about">
+                    <h2>Pare słow o stronie...</h2>
+                    <p>Moim celem jest, aby każdy mógł znaleźć wymarzone kierunki podróży dzięki inspiracjom i rekomendacjom od innych podróżników. Na tej stronie możesz dzielić się wrażeniami, publikować zdjęcia z podróży oraz komentować wpisy innych użytkowników.</p>
+                    <p>Jestem przekonany, że dzięki tej stronie, będziemy mogli tworzyć społeczność, która wspiera się nawzajem w odkrywaniu świata. Oto kilka rzeczy, które lubię:</p>
+                </section>
+            </header>
+        
+    </section>
+    <main>
+        <section id="about" class="about_me_and_form">
+            
+            <form class="add_post_form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2>Stwórz swój post:</h2>
+               
+                {{form.name}}
+                {{form.surname}}
+                {{form.age}}
+                <label>Profile Photo</label>
+                {{form.userphoto}}
+                <label>Trip Photo</label>
+                {{form.photo}}
+                {{form.place}}
+                {{form.text}}
+                <button type="submit">Submit</button>
+            </form>
+            <div class="about_me">
+                <h2>O mnie </h2>
+                <div class="about_me-container">
+                    <div class="about_me_text">
+                        <img class="about_me_text_img" src="{%  static "Miejsce1.jpg" %}" alt="Zdjęcie miejsca">
+                        <p>Miejsce: Egipt</p>
+                        <p>Cześć! Jestem Piotrek i jestem pasjonatem podróży. Lubię odkrywać nowe miejsca, poznawać nowych ludzi i doświadczać różnych kultur. Stworzyłem tę stronę, aby ludzie mogli dzielić się swoimi doświadczeniami związanych z podróżami, radzić sobie nawzajem i chwalić się miejscami, które odwiedzili.</p>
+                        
+                    </div>
+                    <div class="about_me_data">
+                        <img class="about_me_data_img" src="{%  static "Omnie.jpg" %}" alt="Zdjęcie użytkownika">
+                        <div class="about_me_data_text">
+                   
+                            <p>Dane: Piotr  Gajewski </p>
+                         
+                            <p>Wiek: 20 </p>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+      
+        <section id="gallery" class="gallery">
+            <h2>Galeria użytkowników</h2>
+            <div class="posts">
+                {% for post in posts %}
+                    <a class="post" href="{% url 'post_detail' post.id %}">
+                        <div class="post_text_container">
+                            <img class="post_photo" src="{{post.photo.url}}" alt="{{post.name}}">
+                            <p>Miejsce:{{post.place}}</p>
+                            <p>{{post.text}}</p>
+                        </div>
+                        <div class="post_data">
+                            <img class="post_userphoto" src="{{post.userphoto.url}}" alt="{{post.name}}">
+                            <div class="about_me_data_text">
+                    
+                                <p>Dane:{{post.name}} {{post.surname}} </p>
+                            
+                                <p>Wiek: {{post.age}} </p>
+                        
+                            </div>
+                        </div>    
+                    </a>    
+
+                {% endfor %}
+            </div>    
+        </section>
+        <section id="contact">
+            <h2>Kontakt</h2>
+        </section>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.name}} {{post.surname}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'header_about.css' %}">
+    <link rel="stylesheet" href="{% static 'about_me_and_form.css' %}">
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <link rel="stylesheet" href="{% static 'users_gallery.css' %}">
+</head>
+<body>
+    <section class="header_about">
+        <header>
+            <h1>Świat na walizkach! </h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}" >Strona Główna</a></li>
+                </ul>
+            </nav>
+
+                <section class="about">
+
+                </section>
+        </header>
+    </section>    
+    <form class="add_post_form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Stwórz swój post:</h2>
+        {{form.text}}
+        {{form.post}}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% for comment in added_comment_list %}
+        <p>{{ comment.text }}</p>
+    {% endfor %}
+</body>
+</html>

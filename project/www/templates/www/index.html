@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{% static 'contact.css' %}">
     <link rel="stylesheet" href="{% static 'header_about.css' %}">
     <link rel="stylesheet" href="{% static 'about_me_and_form.css' %}">
     <link rel="stylesheet" href="{% static 'form.css' %}">
@@ -19,7 +19,7 @@
         <header>
             <h1>Świat na walizkach! </h1>
             <nav>
-                <ul>
+                <ul class="navi">
                     <li><a href="#home">Strona Główna</a></li>
                     <li><a href="#about">O mnie</a></li>
                     <li><a href="#gallery">Galeria użytkowników</a></li>
@@ -104,6 +104,14 @@
         </section>
         <section id="contact">
             <h2>Kontakt</h2>
+            <div class="contact_info">
+                <ul>
+                    <li><strong>Imię i nazwisko:</strong> Piotr Gajewski</li>
+                    <li><strong>Numer telefonu:</strong> +48 222333444</li>
+                    <li><strong>Adres email:</strong> pga@interia.pl</li>
+                    <li><strong>Facebook:</strong> <a class="fb" href="https://www.facebook.com/Piotrxgajewski">Piotrxgajewski</a></li>
+                </ul>
+            </div>
         </section>
 </body>
 </html>

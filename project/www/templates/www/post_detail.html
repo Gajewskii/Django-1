@@ -8,37 +8,83 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
     <link rel="stylesheet" href="{% static 'header_about.css' %}">
-    <link rel="stylesheet" href="{% static 'about_me_and_form.css' %}">
+    <link rel="stylesheet" href="{% static 'comment.css' %}">
+
     <link rel="stylesheet" href="{% static 'form.css' %}">
     <link rel="stylesheet" href="{% static 'users_gallery.css' %}">
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <section class="header_about">
         <header>
             <h1>Świat na walizkach! </h1>
             <nav>
-                <ul>
+                <ul class="navi">
                     <li><a href="{% url 'index' %}" >Strona Główna</a></li>
                 </ul>
             </nav>
-
-                <section class="about">
-
-                </section>
         </header>
-    </section>    
-    <form class="add_post_form" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h2>Stwórz swój post:</h2>
-        {{form.text}}
-        {{form.post}}
-        <button type="submit">Submit</button>
-    </form>
+    </section>
+    <div class="container">
+        <section class="comment_section">
+            <form class="add_comment_form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2>Napisz komentarz:</h2>
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                    {{form.text}}
+                    {{form.post}}
+                <button type="submit">Submit</button>
+            </form>
+            <div class="post" >
+                <div class="post_text_container">
+                    <img class="post_photo" src="{{post.photo.url}}" alt="{{post.name}}">
+                    <p>Miejsce:{{post.place}}</p>
+                    <p>{{post.text}}</p>
+                </div>
+                <div class="post_data">
+                    <img class="post_userphoto" src="{{post.userphoto.url}}" alt="{{post.name}}">
+                    <div class="about_me_data_text">
+            
+                        <p>Dane:{{post.name}} {{post.surname}} </p>
+                    
+                        <p>Wiek: {{post.age}} </p>
+                
+                    </div>
+                </div>    
+            </div>    
 
-    {% for comment in added_comment_list %}
-        <p>{{ comment.text }}</p>
-    {% endfor %}
+        </section>
+        <div class="view_added_comment">
+            <h2>Komentarze:</h2>
+            <div class="comment_list">
+            
+                {% for comment in added_comment_list %}
+                    <div class="comment">
+                        <div class="comment_data">
+                            <p>{{ comment.created_at|date:"H:i" }}</p>
+                            <p><b>{{ comment.text }}</b></p>
+                        </div>
+                      
+                        <form class="like" action="{% url 'like_comment' comment.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button type="submit" class="like-button">Like</button>
+                            <!-- Display the heart icon if liked -->
+                            {% if comment.like_set.all %}
+                                <i class="fa-solid fa-heart"></i>
+                            {% endif %}
+                        </form>
+                
+                    </div>
+              
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

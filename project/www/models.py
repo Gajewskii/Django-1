@@ -15,7 +15,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.TextField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -23,3 +23,8 @@ class Comment(models.Model):
     
 
 
+class Like(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.comment.text}'
